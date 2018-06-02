@@ -5,7 +5,7 @@
 # Licensed under the GNU LGPL v2.1 - http://www.gnu.org/licenses/lgpl.html
 
 """
-This module contains basic interfaces used throughout the whole samenvattr package.
+This module contains basic interfaces used throughout the whole hitexsumm package.
 
 The interfaces are realized as abstract base classes (ie., some optional functionality
 is provided in the interface itself, so that the interfaces can be subclassed).
@@ -13,10 +13,10 @@ is provided in the interface itself, so that the interfaces can be subclassed).
 
 import logging
 
-from samenvattr import utils, matutils
+from hitexsumm import utils, matutils
 
 
-logger = logging.getLogger('samenvattr.interfaces')
+logger = logging.getLogger('hitexsumm.interfaces')
 
 
 class CorpusABC(utils.SaveLoad):
@@ -37,7 +37,7 @@ class CorpusABC(utils.SaveLoad):
     the corpus size is needed and known in advance (or at least doesn't change so
     that it can be cached), the :func:`len` method should be overridden.
 
-    See the :mod:`samenvattr.corpora.svmlightcorpus` module for an example of a corpus.
+    See the :mod:`hitexsumm.corpora.svmlightcorpus` module for an example of a corpus.
 
     Saving the corpus with the `save` method (inherited from `utils.SaveLoad`) will
     only store the *in-memory* (binary, pickled) object representation=the stream
@@ -140,7 +140,7 @@ class TransformationABC(utils.SaveLoad):
 
     >>> transformed_corpus = transformation[corpus]
 
-    See the :mod:`samenvattr.models.tfidfmodel` module for an example of a transformation.
+    See the :mod:`hitexsumm.models.tfidfmodel` module for an example of a transformation.
 
     """
 
@@ -199,13 +199,13 @@ class SimilarityABC(utils.SaveLoad):
         """
         is_corpus, query = utils.is_corpus(query)
         if self.normalize:
-            # self.normalize only works if the input is a plain samenvattr vector/corpus (as
+            # self.normalize only works if the input is a plain hitexsumm vector/corpus (as
             # advertised in the doc). in fact, input can be a numpy or scipy.sparse matrix
             # as well, but in that case assume tricks are happening and don't normalize
             # anything (self.normalize has no effect).
             if matutils.ismatrix(query):
                 import warnings  # noqa:F401
-                # warnings.warn("non-samenvattr input must already come normalized")
+                # warnings.warn("non-hitexsumm input must already come normalized")
             else:
                 if is_corpus:
                     query = [matutils.unitvec(v) for v in query]

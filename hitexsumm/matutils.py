@@ -11,7 +11,7 @@ This module contains math helper functions.
 import logging
 import math
 
-from samenvattr import utils
+from hitexsumm import utils
 
 import numpy as np
 import scipy.sparse
@@ -140,7 +140,7 @@ def ismatrix(m):
 
 
 def any2sparse(vec, eps=1e-9):
-    """Convert a np/scipy vector into samenvattr document format (=list of 2-tuples)."""
+    """Convert a np/scipy vector into hitexsumm document format (=list of 2-tuples)."""
     if isinstance(vec, np.ndarray):
         return dense2vec(vec, eps)
     if scipy.sparse.issparse(vec):
@@ -189,7 +189,7 @@ def scipy2scipy_clipped(matrix, topn, eps=1e-9):
 
 
 def scipy2sparse(vec, eps=1e-9):
-    """Convert a scipy.sparse vector into samenvattr document format (=list of 2-tuples)."""
+    """Convert a scipy.sparse vector into hitexsumm document format (=list of 2-tuples)."""
     vec = vec.tocsr()
     assert vec.shape[0] == 1
     return [(int(pos), float(val)) for pos, val in zip(vec.indices, vec.data) if np.abs(val) > eps]
@@ -197,7 +197,7 @@ def scipy2sparse(vec, eps=1e-9):
 
 class Scipy2Corpus(object):
     """
-    Convert a sequence of dense/sparse vectors into a streamed samenvattr corpus object.
+    Convert a sequence of dense/sparse vectors into a streamed hitexsumm corpus object.
 
     This is the mirror function to `corpus2csc`.
 
@@ -297,7 +297,7 @@ def corpus2dense(corpus, num_terms, num_docs=None, dtype=np.float32):
 
 class Dense2Corpus(object):
     """
-    Treat dense np array as a sparse, streamed samenvattr corpus.
+    Treat dense np array as a sparse, streamed hitexsumm corpus.
 
     No data copy is made (changes to the underlying matrix imply changes in the
     corpus).
@@ -322,7 +322,7 @@ class Dense2Corpus(object):
 
 class Sparse2Corpus(object):
     """
-    Convert a matrix in scipy.sparse format into a streaming samenvattr corpus.
+    Convert a matrix in scipy.sparse format into a streaming hitexsumm corpus.
 
     This is the mirror function to `corpus2csc`.
 
@@ -397,7 +397,7 @@ def unitvec(vec, norm='l2'):
     Scale a vector to unit length. The only exception is the zero vector, which
     is returned back unchanged.
 
-    Output will be in the same format as input (i.e., samenvattr vector=>samenvattr vector,
+    Output will be in the same format as input (i.e., hitexsumm vector=>hitexsumm vector,
     or np array=>np array, scipy.sparse=>scipy.sparse).
     """
     if norm not in ('l1', 'l2'):
@@ -429,7 +429,7 @@ def unitvec(vec, norm='l2'):
     except StopIteration:
         return vec
 
-    if isinstance(first, (tuple, list)) and len(first) == 2:  # samenvattr sparse format
+    if isinstance(first, (tuple, list)) and len(first) == 2:  # hitexsumm sparse format
         if norm == 'l1':
             length = float(sum(abs(val) for _, val in vec))
         if norm == 'l2':

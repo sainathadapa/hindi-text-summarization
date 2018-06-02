@@ -142,7 +142,7 @@ def deaccent(text):
 
     Examples
     --------
-    >>> from samenvattr.utils import deaccent
+    >>> from hitexsumm.utils import deaccent
     >>> deaccent("Šéf chomutovských komunistů dostal poštou bílý prášek")
     u'Sef chomutovskych komunistu dostal postou bily prasek'
 
@@ -189,11 +189,11 @@ def tokenize(text, lowercase=False, deacc=False, encoding='utf8', errors="strict
     lowercase : bool, optional
         If True - lowercase input string.
     deacc : bool, optional
-        If True - remove accentuation from string by :func:`~samenvattr.utils.deaccent`.
+        If True - remove accentuation from string by :func:`~hitexsumm.utils.deaccent`.
     encoding : str, optional
-        Encoding of input string, used as parameter for :func:`~samenvattr.utils.to_unicode`.
+        Encoding of input string, used as parameter for :func:`~hitexsumm.utils.to_unicode`.
     errors : str, optional
-        Error handling behaviour, used as parameter for :func:`~samenvattr.utils.to_unicode`.
+        Error handling behaviour, used as parameter for :func:`~hitexsumm.utils.to_unicode`.
     to_lower : bool, optional
         Same as `lowercase`.
     lower : bool, optional
@@ -202,11 +202,11 @@ def tokenize(text, lowercase=False, deacc=False, encoding='utf8', errors="strict
     Yields
     ------
     str
-        Contiguous sequences of alphabetic characters (no digits!), using :func:`~samenvattr.utils.simple_tokenize`
+        Contiguous sequences of alphabetic characters (no digits!), using :func:`~hitexsumm.utils.simple_tokenize`
 
     Examples
     --------
-    >>> from samenvattr.utils import tokenize
+    >>> from hitexsumm.utils import tokenize
     >>> list(tokenize('Nic nemůže letět rychlostí vyšší, než 300 tisíc kilometrů za sekundu!', deacc=True))
     [u'Nic', u'nemuze', u'letet', u'rychlosti', u'vyssi', u'nez', u'tisic', u'kilometru', u'za', u'sekundu']
 
@@ -221,7 +221,7 @@ def tokenize(text, lowercase=False, deacc=False, encoding='utf8', errors="strict
 
 
 def simple_tokenize(text):
-    """Tokenize input test using :const:`samenvattr.utils.PAT_ALPHABETIC`.
+    """Tokenize input test using :const:`hitexsumm.utils.PAT_ALPHABETIC`.
 
     Parameters
     ----------
@@ -240,14 +240,14 @@ def simple_tokenize(text):
 
 def simple_preprocess(doc, deacc=False, min_len=2, max_len=15):
     """Convert a document into a list of tokens (also with lowercase and optional de-accents),
-    used :func:`~samenvattr.utils.tokenize`.
+    used :func:`~hitexsumm.utils.tokenize`.
 
     Parameters
     ----------
     doc : str
         Input document.
     deacc : bool, optional
-        If True - remove accentuation from string by :func:`~samenvattr.utils.deaccent`.
+        If True - remove accentuation from string by :func:`~hitexsumm.utils.deaccent`.
     min_len : int, optional
         Minimal length of token in result (inclusive).
     max_len : int, optional
@@ -350,7 +350,7 @@ class SaveLoad(object):
     """
     @classmethod
     def load(cls, fname, mmap=None):
-        """Load a previously saved object (using :meth:`~samenvattr.utils.SaveLoad.save`) from file.
+        """Load a previously saved object (using :meth:`~hitexsumm.utils.SaveLoad.save`) from file.
 
         Parameters
         ----------
@@ -363,7 +363,7 @@ class SaveLoad(object):
 
         See Also
         --------
-        :meth:`~samenvattr.utils.SaveLoad.save`
+        :meth:`~hitexsumm.utils.SaveLoad.save`
 
         Returns
         -------
@@ -387,7 +387,7 @@ class SaveLoad(object):
 
     def _load_specials(self, fname, mmap, compress, subname):
         """Loads any attributes that were stored specially, and gives the same opportunity
-        to recursively included :class:`~samenvattr.utils.SaveLoad` instances.
+        to recursively included :class:`~hitexsumm.utils.SaveLoad` instances.
 
         Parameters
         ----------
@@ -495,7 +495,7 @@ class SaveLoad(object):
 
         See Also
         --------
-        :meth:`~samenvattr.utils.SaveLoad.load`
+        :meth:`~hitexsumm.utils.SaveLoad.load`
 
         """
         logger.info("saving %s object under %s, separately %s", self.__class__.__name__, fname, separately)
@@ -515,7 +515,7 @@ class SaveLoad(object):
 
     def _save_specials(self, fname, separately, sep_limit, ignore, pickle_protocol, compress, subname):
         """Save aside any attributes that need to be handled separately, including
-        by recursion any attributes that are themselves :class:`~samenvattr.utils.SaveLoad` instances.
+        by recursion any attributes that are themselves :class:`~hitexsumm.utils.SaveLoad` instances.
 
         Parameters
         ----------
@@ -532,13 +532,13 @@ class SaveLoad(object):
         compress : bool
             If True - compress output with :func:`numpy.savez_compressed`.
         subname : function
-            Produced by :meth:`~samenvattr.utils.SaveLoad._adapt_by_suffix`
+            Produced by :meth:`~hitexsumm.utils.SaveLoad._adapt_by_suffix`
 
         Returns
         -------
         list of (obj, {attrib: value, ...})
             Settings that the caller should use to restore each object's attributes that were set aside
-            during the default :func:`~samenvattr.utils.pickle`.
+            during the default :func:`~hitexsumm.utils.pickle`.
 
         """
         asides = {}
@@ -639,7 +639,7 @@ class SaveLoad(object):
 
         See Also
         --------
-        :meth:`~samenvattr.utils.SaveLoad.load`
+        :meth:`~hitexsumm.utils.SaveLoad.load`
 
         """
         try:
@@ -767,7 +767,7 @@ def dict_from_corpus(corpus):
 
     Returns
     ------
-    id2word : :class:`~samenvattr.utils.FakeDict`
+    id2word : :class:`~hitexsumm.utils.FakeDict`
         "Fake" mapping which maps each `word_id` -> `str(word_id)`.
 
     Warnings
@@ -869,7 +869,7 @@ class RepeatCorpus(SaveLoad):
 
     Examples
     --------
-    >>> from samenvattr.utils import RepeatCorpus
+    >>> from hitexsumm.utils import RepeatCorpus
     >>>
     >>> corpus = [[(1, 2)], []] # 2 documents
     >>> list(RepeatCorpus(corpus, 5)) # repeat 2.5 times to get 5 documents
@@ -900,7 +900,7 @@ class RepeatCorpusNTimes(SaveLoad):
 
     Examples
     --------
-    >>> from samenvattr.utils import RepeatCorpusNTimes
+    >>> from hitexsumm.utils import RepeatCorpusNTimes
     >>>
     >>> corpus = [[(1, 0.5)], []]
     >>> list(RepeatCorpusNTimes(corpus, 3)) # repeat 3 times
@@ -1037,7 +1037,7 @@ def decode_htmlentities(text):
 
     Examples
     --------
-    >>> from samenvattr.utils import decode_htmlentities
+    >>> from hitexsumm.utils import decode_htmlentities
     >>>
     >>> u = u'E tu vivrai nel terrore - L&#x27;aldil&#xE0; (1981)'
     >>> print(decode_htmlentities(u).encode('UTF-8'))
@@ -1155,7 +1155,7 @@ if os.name == 'nt':
     warnings.warn("detected Windows; aliasing chunkize to chunkize_serial")
 
     def chunkize(corpus, chunksize, maxsize=0, as_numpy=False):
-        """Split `corpus` into smaller chunks, used :func:`~samenvattr.utils.chunkize_serial`.
+        """Split `corpus` into smaller chunks, used :func:`~hitexsumm.utils.chunkize_serial`.
 
         Parameters
         ----------
@@ -1178,7 +1178,7 @@ if os.name == 'nt':
             yield chunk
 else:
     def chunkize(corpus, chunksize, maxsize=0, as_numpy=False):
-        """Split `corpus` into smaller chunks, used :func:`~samenvattr.utils.chunkize_serial`.
+        """Split `corpus` into smaller chunks, used :func:`~hitexsumm.utils.chunkize_serial`.
 
         Parameters
         ----------
@@ -1201,7 +1201,7 @@ else:
         and is meant to reduce I/O delays, which can be significant when `corpus` comes from a slow medium (like HDD).
 
         If `maxsize == 0`, don't fool around with parallelism and simply yield the chunksize
-        via :func:`~samenvattr.utils.chunkize_serial` (no I/O optimizations).
+        via :func:`~hitexsumm.utils.chunkize_serial` (no I/O optimizations).
 
         Yields
         ------
@@ -1311,7 +1311,7 @@ def revdict(d):
 
     Examples
     --------
-    >>> from samenvattr.utils import revdict
+    >>> from hitexsumm.utils import revdict
     >>> d = {1: 2, 3: 4}
     >>> revdict(d)
     {2: 1, 4: 3}
@@ -1390,7 +1390,7 @@ def toptexts(query, texts, index, n=10):
         object that can return something insightful for each document via `texts[docid]`,
         such as its fulltext or snippet.
     index : any
-        a class from samenvattr.similarity.docsim
+        a class from hitexsumm.similarity.docsim
 
     Return
     ------
@@ -1404,7 +1404,7 @@ def toptexts(query, texts, index, n=10):
     return [(topid, topcosine, texts[topid]) for topid, topcosine in sims[:n]]  # only consider top-n most similar docs
 
 
-def randfname(prefix='samenvattr'):
+def randfname(prefix='hitexsumm'):
     """Generate path with random filename/
 
     Parameters
@@ -1553,7 +1553,7 @@ def lemmatize(content, allowed_tags=re.compile(r'(NN|VB|JJ|RB)'), light=False,
 
     Examples
     --------
-    >>> from samenvattr.utils import lemmatize
+    >>> from hitexsumm.utils import lemmatize
     >>> lemmatize('Hello World! How is it going?! Nonexistentword, 21')
     ['world/NN', 'be/VB', 'go/VB', 'nonexistentword/NN']
     >>> lemmatize('The study ranks high.')
@@ -1590,7 +1590,7 @@ def lemmatize(content, allowed_tags=re.compile(r'(NN|VB|JJ|RB)'), light=False,
 
 
 def mock_data_row(dim=1000, prob_nnz=0.5, lam=1.0):
-    """Create a random samenvattr BoW vector.
+    """Create a random hitexsumm BoW vector.
 
     Parameters
     ----------
@@ -1612,24 +1612,24 @@ def mock_data_row(dim=1000, prob_nnz=0.5, lam=1.0):
 
 
 def mock_data(n_items=1000, dim=1000, prob_nnz=0.5, lam=1.0):
-    """Create a random samenvattr-style corpus (BoW), used :func:`~samenvattr.utils.mock_data_row`.
+    """Create a random hitexsumm-style corpus (BoW), used :func:`~hitexsumm.utils.mock_data_row`.
 
     Parameters
     ----------
     n_items : int
         Size of corpus
     dim : int
-        Dimension of vector, used for :func:`~samenvattr.utils.mock_data_row`.
+        Dimension of vector, used for :func:`~hitexsumm.utils.mock_data_row`.
     prob_nnz : float, optional
         Probability of each coordinate will be nonzero, will be drawn from Poisson distribution,
-        used for :func:`~samenvattr.utils.mock_data_row`.
+        used for :func:`~hitexsumm.utils.mock_data_row`.
     lam : float, optional
-        Parameter for Poisson distribution, used for :func:`~samenvattr.utils.mock_data_row`.
+        Parameter for Poisson distribution, used for :func:`~hitexsumm.utils.mock_data_row`.
 
     Returns
     -------
     list of list of (int, float)
-        samenvattr-style corpus.
+        hitexsumm-style corpus.
 
     """
     return [mock_data_row(dim=dim, prob_nnz=prob_nnz, lam=lam) for _ in range(n_items)]
@@ -1730,13 +1730,13 @@ def keep_vocab_item(word, count, min_count, trim_rule=None):
 def check_output(stdout=subprocess.PIPE, *popenargs, **kwargs):
     r"""Run command with arguments and return its output as a byte string.
     Backported from Python 2.7 as it's implemented as pure python on stdlib + small modification.
-    Widely used for :mod:`samenvattr.models.wrappers`.
+    Widely used for :mod:`hitexsumm.models.wrappers`.
 
     Very similar with [6]_
 
     Examples
     --------
-    >>> from samenvattr.utils import check_output
+    >>> from hitexsumm.utils import check_output
     >>> check_output(args=['echo', '1'])
     '1\n'
 
@@ -1809,7 +1809,7 @@ def strided_windows(ndarray, window_size):
 
     Examples
     --------
-    >>> from samenvattr.utils import strided_windows
+    >>> from hitexsumm.utils import strided_windows
     >>> strided_windows(np.arange(5), 2)
     array([[0, 1],
            [1, 2],
@@ -1893,7 +1893,7 @@ def flatten(nested_list):
 
 
 def lazy_flatten(nested_list):
-    """Lazy version of :func:`~samenvattr.utils.flatten`.
+    """Lazy version of :func:`~hitexsumm.utils.flatten`.
 
     Parameters
     ----------
