@@ -20,9 +20,9 @@ Data
 """
 
 
-from samenvattr.summarization.syntactic_unit import SyntacticUnit
-from samenvattr.parsing.preprocessing import preprocess_documents
-from samenvattr.utils import tokenize
+from hitexsumm.summarization.syntactic_unit import SyntacticUnit
+from hitexsumm.parsing.preprocessing import preprocess_documents
+from hitexsumm.utils import tokenize
 import re
 import logging
 
@@ -48,7 +48,7 @@ UNDO_AB_ACRONYM = re.compile(r'(\.[a-zA-Z]\.)' + SEPARATOR + r'(\w)', re.UNICODE
 
 def split_sentences(text):
     """Split and get list of sentences from given text. It preserves abbreviations set in
-    :const:`~samenvattr.summarization.textcleaner.AB_SENIOR` and :const:`~samenvattr.summarization.textcleaner.AB_ACRONYM`.
+    :const:`~hitexsumm.summarization.textcleaner.AB_SENIOR` and :const:`~hitexsumm.summarization.textcleaner.AB_ACRONYM`.
 
     Parameters
     ----------
@@ -62,7 +62,7 @@ def split_sentences(text):
 
     Example
     -------
-    >>> from samenvattr.summarization.textcleaner import split_sentences
+    >>> from hitexsumm.summarization.textcleaner import split_sentences
     >>> text = '''Beautiful is better than ugly.
     ... Explicit is better than implicit. Simple is better than complex.'''
     >>> split_sentences(text)
@@ -146,7 +146,7 @@ def replace_with_separator(text, separator, regexs):
 
 def get_sentences(text):
     """Sentence generator from provided text. Sentence pattern set
-    in :const:`~samenvattr.summarization.textcleaner.RE_SENTENCE`.
+    in :const:`~hitexsumm.summarization.textcleaner.RE_SENTENCE`.
 
     Parameters
     ----------
@@ -173,7 +173,7 @@ def get_sentences(text):
 
 def merge_syntactic_units(original_units, filtered_units, tags=None):
     """Process given sentences and its filtered (tokenized) copies into
-    :class:`~samenvattr.summarization.syntactic_unit.SyntacticUnit`. Also adds tags if they are provided to produced units.
+    :class:`~hitexsumm.summarization.syntactic_unit.SyntacticUnit`. Also adds tags if they are provided to produced units.
 
     Parameters
     ----------
@@ -186,7 +186,7 @@ def merge_syntactic_units(original_units, filtered_units, tags=None):
 
     Returns
     -------
-    list of :class:~samenvattr.summarization.syntactic_unit.SyntacticUnit
+    list of :class:~hitexsumm.summarization.syntactic_unit.SyntacticUnit
         List of syntactic units (sentences).
 
     """
@@ -235,7 +235,7 @@ def clean_text_by_sentences(text):
 
     Returns
     -------
-    list of :class:`~samenvattr.summarization.syntactic_unit.SyntacticUnit`
+    list of :class:`~hitexsumm.summarization.syntactic_unit.SyntacticUnit`
         Sentences of the given text.
 
     """
@@ -258,11 +258,11 @@ def clean_text_by_word(text, deacc=True):
     Returns
     -------
     dict
-        Words as keys, :class:`~samenvattr.summarization.syntactic_unit.SyntacticUnit` as values.
+        Words as keys, :class:`~hitexsumm.summarization.syntactic_unit.SyntacticUnit` as values.
 
     Example
     -------
-    >>> from samenvattr.summarization.textcleaner import clean_text_by_word
+    >>> from hitexsumm.summarization.textcleaner import clean_text_by_word
     >>> clean_text_by_word("God helps those who help themselves")
     {'god': Original unit: 'god' *-*-*-* Processed unit: 'god',
     'help': Original unit: 'help' *-*-*-* Processed unit: 'help',
@@ -282,7 +282,7 @@ def clean_text_by_word(text, deacc=True):
 
 def tokenize_by_word(text):
     """Tokenize input text. Before tokenizing transforms text to lower case and removes accentuation and acronyms set
-    :const:`~samenvattr.summarization.textcleaner.AB_ACRONYM_LETTERS`.
+    :const:`~hitexsumm.summarization.textcleaner.AB_ACRONYM_LETTERS`.
 
     Parameters
     ----------
@@ -296,7 +296,7 @@ def tokenize_by_word(text):
 
     Example
     -------
-    >>> from samenvattr.summarization.textcleaner import tokenize_by_word
+    >>> from hitexsumm.summarization.textcleaner import tokenize_by_word
     >>> g = tokenize_by_word('Veni. Vedi. Vici.')
     >>> print(next(g))
     veni

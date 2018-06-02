@@ -4,8 +4,8 @@
 # Licensed under the GNU LGPL v2.1 - http://www.gnu.org/licenses/lgpl.html
 
 
-from samenvattr.summarization.textcleaner import tokenize_by_word as _tokenize_by_word
-from samenvattr.utils import to_unicode
+from hitexsumm.summarization.textcleaner import tokenize_by_word as _tokenize_by_word
+from hitexsumm.utils import to_unicode
 import numpy
 import scipy
 

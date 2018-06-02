@@ -21,10 +21,10 @@ from collections import Mapping, defaultdict
 import logging
 import itertools
 
-from samenvattr import utils
+from hitexsumm import utils
 
 
-logger = logging.getLogger('samenvattr.corpora.dictionary')
+logger = logging.getLogger('hitexsumm.corpora.dictionary')
 
 
 class Dictionary(utils.SaveLoad, Mapping):
@@ -328,7 +328,7 @@ class Dictionary(utils.SaveLoad, Mapping):
 
         Return a transformation object which, when accessed as `result[doc_from_other_corpus]`,
         will convert documents from a corpus built using the `other` dictionary
-        into a document using the new, merged dictionary (see :class:`samenvattr.interfaces.TransformationABC`).
+        into a document using the new, merged dictionary (see :class:`hitexsumm.interfaces.TransformationABC`).
 
         Example:
 
@@ -360,8 +360,8 @@ class Dictionary(utils.SaveLoad, Mapping):
         except Exception:
             pass
 
-        import samenvattr.models
-        return samenvattr.models.VocabTransform(old2new)
+        import hitexsumm.models
+        return hitexsumm.models.VocabTransform(old2new)
 
     @staticmethod
     def load_from_text(fname):

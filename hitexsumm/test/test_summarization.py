@@ -7,7 +7,7 @@
 Automated test to reproduce the results of Mihalcea and Tarau (2004).
 
 Mihalcea and Tarau (2004) introduces the TextRank summarization algorithm.
-As a validation of the samenvattr implementation we reproduced its results
+As a validation of the hitexsumm implementation we reproduced its results
 in this test.
 
 """
@@ -16,9 +16,9 @@ import os.path
 import logging
 import unittest
 
-from samenvattr import utils
-from samenvattr.corpora import Dictionary
-from samenvattr.summarization import summarize, summarize_corpus, keywords, mz_keywords
+from hitexsumm import utils
+from hitexsumm.corpora import Dictionary
+from hitexsumm.summarization import summarize, summarize_corpus, keywords, mz_keywords
 
 
 class TestSummarizationTest(unittest.TestCase):

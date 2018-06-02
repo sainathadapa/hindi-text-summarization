@@ -25,7 +25,7 @@ Remove nodes with no edges.
 
 """
 
-from samenvattr.summarization.graph import Graph
+from hitexsumm.summarization.graph import Graph
 
 
 def build_graph(sequence):
@@ -38,7 +38,7 @@ def build_graph(sequence):
 
     Returns
     -------
-    :class:`~samenvattr.summarization.graph.Graph`
+    :class:`~hitexsumm.summarization.graph.Graph`
         Created graph.
 
     """
@@ -54,7 +54,7 @@ def remove_unreachable_nodes(graph):
 
     Parameters
     ----------
-    graph : :class:`~samenvattr.summarization.graph.Graph`
+    graph : :class:`~hitexsumm.summarization.graph.Graph`
         Given graph.
 
     """

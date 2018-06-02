@@ -13,15 +13,15 @@ Examples
 
 Calculate Pagerank for words
 
->>> from samenvattr.summarization.keywords import get_graph
->>> from samenvattr.summarization.pagerank_weighted import pagerank_weighted
+>>> from hitexsumm.summarization.keywords import get_graph
+>>> from hitexsumm.summarization.pagerank_weighted import pagerank_weighted
 >>> graph = get_graph("The road to hell is paved with good intentions.")
 >>> # result will looks like {'good': 0.70432858653171504, 'hell': 0.051128871128006126, ...}
 >>> result = pagerank_weighted(graph)
 
 Build matrix from graph
 
->>> from samenvattr.summarization.pagerank_weighted import build_adjacency_matrix
+>>> from hitexsumm.summarization.pagerank_weighted import build_adjacency_matrix
 >>> build_adjacency_matrix(graph).todense()
 matrix([[ 0.,  0.,  0.,  0.,  0.],
         [ 0.,  0.,  1.,  0.,  0.],
@@ -45,7 +45,7 @@ def pagerank_weighted(graph, damping=0.85):
 
     Parameters
     ----------
-    graph : :class:`~samenvattr.summarization.graph.Graph`
+    graph : :class:`~hitexsumm.summarization.graph.Graph`
         Given graph.
     damping : float
         Damping parameter, optional
@@ -72,7 +72,7 @@ def build_adjacency_matrix(graph):
 
     Parameters
     ----------
-    graph : :class:`~samenvattr.summarization.graph.Graph`
+    graph : :class:`~hitexsumm.summarization.graph.Graph`
         Given graph.
 
     Returns
@@ -106,7 +106,7 @@ def build_probability_matrix(graph):
 
     Parameters
     ----------
-    graph : :class:`~samenvattr.summarization.graph.Graph`
+    graph : :class:`~hitexsumm.summarization.graph.Graph`
         Given graph.
 
     Returns
@@ -153,11 +153,11 @@ def principal_eigenvector(a):
 
 def process_results(graph, vec):
     """Get `graph` nodes and corresponding absolute values of provided eigenvector.
-    This function is helper for :func:`~samenvattr.summarization.pagerank_weighted.pagerank_weighted`
+    This function is helper for :func:`~hitexsumm.summarization.pagerank_weighted.pagerank_weighted`
 
     Parameters
     ----------
-    graph : :class:`~samenvattr.summarization.graph.Graph`
+    graph : :class:`~hitexsumm.summarization.graph.Graph`
         Given graph.
     vec : numpy.ndarray, shape = [n, ]
         Given eigenvector, n is number of nodes of `graph`.

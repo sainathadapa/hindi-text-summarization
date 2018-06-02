@@ -9,7 +9,7 @@ Examples
 --------
 Extract keywords from text
 
->>> from samenvattr.summarization import keywords
+>>> from hitexsumm.summarization import keywords
 >>> text='''Challenges in natural language processing frequently involve
 ... speech recognition, natural language understanding, natural language
 ... generation (frequently from formal, machine-readable logical forms),
@@ -32,12 +32,12 @@ Data:
 
 """
 
-from samenvattr.summarization.pagerank_weighted import pagerank_weighted as _pagerank
-from samenvattr.summarization.textcleaner import clean_text_by_word as _clean_text_by_word
-from samenvattr.summarization.textcleaner import tokenize_by_word as _tokenize_by_word
-from samenvattr.summarization.commons import build_graph as _build_graph
-from samenvattr.summarization.commons import remove_unreachable_nodes as _remove_unreachable_nodes
-from samenvattr.utils import to_unicode
+from hitexsumm.summarization.pagerank_weighted import pagerank_weighted as _pagerank
+from hitexsumm.summarization.textcleaner import clean_text_by_word as _clean_text_by_word
+from hitexsumm.summarization.textcleaner import tokenize_by_word as _tokenize_by_word
+from hitexsumm.summarization.commons import build_graph as _build_graph
+from hitexsumm.summarization.commons import remove_unreachable_nodes as _remove_unreachable_nodes
+from hitexsumm.utils import to_unicode
 from itertools import combinations as _combinations
 from six.moves.queue import Queue as _Queue
 from six.moves import xrange
@@ -101,7 +101,7 @@ def _get_words_for_graph(tokens, pos_filter=None):
 
 
 def _get_first_window(split_text):
-    """Get first :const:`~samenvattr.parsing.keywords.WINDOW_SIZE` tokens from given `split_text`.
+    """Get first :const:`~hitexsumm.parsing.keywords.WINDOW_SIZE` tokens from given `split_text`.
 
     Parameters
     ----------
@@ -111,7 +111,7 @@ def _get_first_window(split_text):
     Returns
     -------
     list of str
-        First :const:`~samenvattr.parsing.keywords.WINDOW_SIZE` tokens.
+        First :const:`~hitexsumm.parsing.keywords.WINDOW_SIZE` tokens.
 
     """
     return split_text[:WINDOW_SIZE]
@@ -122,7 +122,7 @@ def _set_graph_edge(graph, tokens, word_a, word_b):
 
     Parameters
     ----------
-    graph : :class:~samenvattr.summarization.graph.Graph
+    graph : :class:~hitexsumm.summarization.graph.Graph
         Given graph.
     tokens : dict
         Original units (words) as keys and processed units (tokens) as values.
@@ -142,12 +142,12 @@ def _set_graph_edge(graph, tokens, word_a, word_b):
 
 
 def _process_first_window(graph, tokens, split_text):
-    """Sets an edges between nodes taken from first :const:`~samenvattr.parsing.keywords.WINDOW_SIZE`
+    """Sets an edges between nodes taken from first :const:`~hitexsumm.parsing.keywords.WINDOW_SIZE`
     words of `split_text` if they exist in `tokens` and `graph`, inplace.
 
     Parameters
     ----------
-    graph : :class:~samenvattr.summarization.graph.Graph
+    graph : :class:~hitexsumm.summarization.graph.Graph
         Given graph.
     tokens : dict
         Original units (words) as keys and processed units (tokens) as values.
@@ -187,7 +187,7 @@ def _process_word(graph, tokens, queue, word):
 
     Parameters
     ----------
-    graph : :class:`~samenvattr.summarization.graph.Graph`
+    graph : :class:`~hitexsumm.summarization.graph.Graph`
         Given graph.
     tokens : dict
         Original units (words) as keys and processed units (tokens) as values.
@@ -220,11 +220,11 @@ def _update_queue(queue, word):
 def _process_text(graph, tokens, split_text):
     """Process `split_text` by updating given `graph` with new eges between nodes
     if they exists in `tokens` and `graph`.
-    Words are taken from `split_text` with window size :const:`~samenvattr.parsing.keywords.WINDOW_SIZE`.
+    Words are taken from `split_text` with window size :const:`~hitexsumm.parsing.keywords.WINDOW_SIZE`.
 
     Parameters
     ----------
-    graph : :class:`~samenvattr.summarization.graph.Graph`
+    graph : :class:`~hitexsumm.summarization.graph.Graph`
         Given graph.
     tokens : dict
         Original units (words) as keys and processed units (tokens) as values.
@@ -262,11 +262,11 @@ def _queue_iterator(queue):
 
 def _set_graph_edges(graph, tokens, split_text):
     """Updates given `graph` by setting eges between nodes if they exists in `tokens` and `graph`.
-    Words are taken from `split_text` with window size :const:`~samenvattr.parsing.keywords.WINDOW_SIZE`.
+    Words are taken from `split_text` with window size :const:`~hitexsumm.parsing.keywords.WINDOW_SIZE`.
 
     Parameters
     ----------
-    graph : :class:~samenvattr.summarization.graph.Graph
+    graph : :class:~hitexsumm.summarization.graph.Graph
         Given graph.
     tokens : dict
         Original units (words) as keys and processed units (tokens) as values.
@@ -543,7 +543,7 @@ def get_graph(text):
 
     Returns
     -------
-    :class:`~samenvattr.summarization.graph.Graph`
+    :class:`~hitexsumm.summarization.graph.Graph`
         Created graph.
 
     """

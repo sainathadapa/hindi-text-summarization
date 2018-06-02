@@ -20,7 +20,7 @@ Data
 Example
 -------
 
->>> from samenvattr.summarization.summarizer import summarize
+>>> from hitexsumm.summarization.summarizer import summarize
 >>> text = '''Rice Pudding - Poem by Alan Alexander Milne
 ... What is the matter with Mary Jane?
 ... She's crying with all her might and main,
@@ -51,13 +51,13 @@ And it's lovely rice pudding for dinner again!
 """
 
 import logging
-from samenvattr.utils import deprecated
-from samenvattr.summarization.pagerank_weighted import pagerank_weighted as _pagerank
-from samenvattr.summarization.textcleaner import clean_text_by_sentences as _clean_text_by_sentences
-from samenvattr.summarization.commons import build_graph as _build_graph
-from samenvattr.summarization.commons import remove_unreachable_nodes as _remove_unreachable_nodes
-from samenvattr.summarization.bm25 import get_bm25_weights as _bm25_weights
-from samenvattr.corpora import Dictionary
+from hitexsumm.utils import deprecated
+from hitexsumm.summarization.pagerank_weighted import pagerank_weighted as _pagerank
+from hitexsumm.summarization.textcleaner import clean_text_by_sentences as _clean_text_by_sentences
+from hitexsumm.summarization.commons import build_graph as _build_graph
+from hitexsumm.summarization.commons import remove_unreachable_nodes as _remove_unreachable_nodes
+from hitexsumm.summarization.bm25 import get_bm25_weights as _bm25_weights
+from hitexsumm.corpora import Dictionary
 from math import log10 as _log10
 
 
@@ -74,7 +74,7 @@ def _set_graph_edge_weights(graph):
 
     Parameters
     ----------
-    graph : :class:`~samenvattr.summarization.graph.Graph`
+    graph : :class:`~hitexsumm.summarization.graph.Graph`
         Given graph.
 
     """
@@ -108,7 +108,7 @@ def _create_valid_graph(graph):
 
     Parameters
     ----------
-    graph : :class:`~samenvattr.summarization.graph.Graph`
+    graph : :class:`~hitexsumm.summarization.graph.Graph`
         Given graph.
 
     """
@@ -180,7 +180,7 @@ def _build_corpus(sentences):
 
     Parameters
     ----------
-    sentences : list of :class:`~samenvattr.summarization.syntactic_unit.SyntacticUnit`
+    sentences : list of :class:`~hitexsumm.summarization.syntactic_unit.SyntacticUnit`
         Given sentences.
 
     Returns
@@ -199,7 +199,7 @@ def _get_important_sentences(sentences, corpus, important_docs):
 
     Parameters
     ----------
-    sentences : list of :class:`~samenvattr.summarization.syntactic_unit.SyntacticUnit`
+    sentences : list of :class:`~hitexsumm.summarization.syntactic_unit.SyntacticUnit`
         Given sentences.
     corpus : list of list of (int, int)
         Provided corpus.
@@ -208,7 +208,7 @@ def _get_important_sentences(sentences, corpus, important_docs):
 
     Returns
     -------
-    list of :class:`~samenvattr.summarization.syntactic_unit.SyntacticUnit`
+    list of :class:`~hitexsumm.summarization.syntactic_unit.SyntacticUnit`
         Most important sentences.
 
     """
@@ -222,14 +222,14 @@ def _get_sentences_with_word_count(sentences, word_count):
 
     Parameters
     ----------
-    sentences : list of :class:`~samenvattr.summarization.syntactic_unit.SyntacticUnit`
+    sentences : list of :class:`~hitexsumm.summarization.syntactic_unit.SyntacticUnit`
         Given sentences.
     word_count : int or None
         Number of returned words. If None full most important sentences will be returned.
 
     Returns
     -------
-    list of :class:`~samenvattr.summarization.syntactic_unit.SyntacticUnit`
+    list of :class:`~hitexsumm.summarization.syntactic_unit.SyntacticUnit`
         Most important sentences.
 
     """
@@ -256,7 +256,7 @@ def _extract_important_sentences(sentences, corpus, important_docs, word_count):
 
     Parameters
     ----------
-    sentences : list of :class:`~samenvattr.summarization.syntactic_unit.SyntacticUnit`
+    sentences : list of :class:`~hitexsumm.summarization.syntactic_unit.SyntacticUnit`
         Given sentences.
     corpus : list of list of (int, int)
         Provided corpus.
@@ -267,7 +267,7 @@ def _extract_important_sentences(sentences, corpus, important_docs, word_count):
 
     Returns
     -------
-    list of :class:`~samenvattr.summarization.syntactic_unit.SyntacticUnit`
+    list of :class:`~hitexsumm.summarization.syntactic_unit.SyntacticUnit`
         Most important sentences.
 
     """
@@ -285,7 +285,7 @@ def _format_results(extracted_sentences, split):
 
     Parameters
     ----------
-    extracted_sentences : list of :class:~samenvattr.summarization.syntactic_unit.SyntacticUnit
+    extracted_sentences : list of :class:~hitexsumm.summarization.syntactic_unit.SyntacticUnit
         Given sentences.
     split : bool
         If True sentences will be returned as list. Otherwise sentences will be merged and returned as string.
@@ -322,11 +322,11 @@ def _build_hasheable_corpus(corpus):
 
 def summarize_corpus(corpus, ratio=0.2):
     """Get a list of the most important documents of a corpus using a variation of the TextRank algorithm [1]_.
-     Used as helper for summarize :func:`~samenvattr.summarization.summarizer.summarizer`
+     Used as helper for summarize :func:`~hitexsumm.summarization.summarizer.summarizer`
 
     Note
     ----
-    The input must have at least :const:`~samenvattr.summarization.summarizer.INPUT_MIN_LENGTH` documents for the summary
+    The input must have at least :const:`~hitexsumm.summarization.summarizer.INPUT_MIN_LENGTH` documents for the summary
     to make sense.
 
 
@@ -380,9 +380,9 @@ def summarize(text, ratio=0.2, word_count=None, split=False):
 
     Note
     ----
-    The input should be a string, and must be longer than :const:`~samenvattr.summarization.summarizer.INPUT_MIN_LENGTH`
+    The input should be a string, and must be longer than :const:`~hitexsumm.summarization.summarizer.INPUT_MIN_LENGTH`
     sentences for the summary to make sense.
-    The text will be split into sentences using the split_sentences method in the :mod:`samenvattr.summarization.texcleaner`
+    The text will be split into sentences using the split_sentences method in the :mod:`hitexsumm.summarization.texcleaner`
     module. Note that newlines divide sentences.
 
 

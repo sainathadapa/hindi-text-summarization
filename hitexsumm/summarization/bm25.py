@@ -16,7 +16,7 @@ descibed in [1]_, also you may check Wikipedia page [2]_.
 
 Examples
 --------
->>> from samenvattr.summarization.bm25 import get_bm25_weights
+>>> from hitexsumm.summarization.bm25 import get_bm25_weights
 >>> corpus = [
 ...     ["black", "cat", "white", "cat"],
 ...     ["cat", "outer", "space"],
@@ -165,7 +165,7 @@ def get_bm25_weights(corpus):
 
     Examples
     --------
-    >>> from samenvattr.summarization.bm25 import get_bm25_weights
+    >>> from hitexsumm.summarization.bm25 import get_bm25_weights
     >>> corpus = [
     ...     ["black", "cat", "white", "cat"],
     ...     ["cat", "outer", "space"],

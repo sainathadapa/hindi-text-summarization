@@ -9,7 +9,7 @@ Author - Vivake Gupta (v@nano.com), optimizations and cleanup of the code by Lar
 
 Examples:
 ---------
->>> from samenvattr.parsing.porter import PorterStemmer
+>>> from hitexsumm.parsing.porter import PorterStemmer
 >>>
 >>> p = PorterStemmer()
 >>> p.stem("apple")
@@ -49,7 +49,7 @@ class PorterStemmer(object):
 
         Examples
         --------
-        >>> from samenvattr.parsing.porter import PorterStemmer
+        >>> from hitexsumm.parsing.porter import PorterStemmer
         >>> p = PorterStemmer()
         >>> p.stem("ponies")
         'poni'
@@ -81,7 +81,7 @@ class PorterStemmer(object):
 
         Examples
         --------
-        >>> from samenvattr.parsing.porter import PorterStemmer
+        >>> from hitexsumm.parsing.porter import PorterStemmer
         >>> p = PorterStemmer()
         >>> p.stem_sentence("Wow very nice woman with apple")
         'wow veri nice woman with appl'
@@ -104,7 +104,7 @@ class PorterStemmer(object):
 
         Examples
         --------
-        >>> from samenvattr.parsing.porter import PorterStemmer
+        >>> from hitexsumm.parsing.porter import PorterStemmer
         >>> p = PorterStemmer()
         >>> p.stem_documents(["Have a very nice weekend", "Have a very nice weekend"])
         ['have a veri nice weekend', 'have a veri nice weekend']

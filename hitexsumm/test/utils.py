@@ -10,7 +10,7 @@ import tempfile
 import os
 import shutil
 
-from samenvattr.corpora import Dictionary
+from hitexsumm.corpora import Dictionary
 
 module_path = os.path.dirname(__file__)  # needed because sample data files are located in the same folder
 

@@ -5,12 +5,12 @@
 
 """This module contains methods for parsing and preprocessing strings. Let's consider the most noticeable:
 
-* :func:`~samenvattr.parsing.preprocessing.remove_stopwords` - remove all stopwords from string
-* :func:`~samenvattr.parsing.preprocessing.preprocess_string` -  preprocess string (in default NLP meaning)
+* :func:`~hitexsumm.parsing.preprocessing.remove_stopwords` - remove all stopwords from string
+* :func:`~hitexsumm.parsing.preprocessing.preprocess_string` -  preprocess string (in default NLP meaning)
 
 Examples:
 ---------
->>> from samenvattr.parsing.preprocessing import remove_stopwords
+>>> from hitexsumm.parsing.preprocessing import remove_stopwords
 >>> remove_stopwords("Better late than never, but better never late.")
 u'Better late never, better late.'
 >>>
@@ -37,8 +37,8 @@ import re
 import string
 import glob
 
-from samenvattr import utils
-from samenvattr.parsing.porter import PorterStemmer
+from hitexsumm import utils
+from hitexsumm.parsing.porter import PorterStemmer
 
 
 STOPWORDS = frozenset([
@@ -90,7 +90,7 @@ RE_WHITESPACE = re.compile(r"(\s)+", re.UNICODE)
 
 
 def remove_stopwords(s):
-    """Remove :const:`~samenvattr.parsing.preprocessing.STOPWORDS` from `s`.
+    """Remove :const:`~hitexsumm.parsing.preprocessing.STOPWORDS` from `s`.
 
     Parameters
     ----------
@@ -99,11 +99,11 @@ def remove_stopwords(s):
     Returns
     -------
     str
-        Unicode string without :const:`~samenvattr.parsing.preprocessing.STOPWORDS`.
+        Unicode string without :const:`~hitexsumm.parsing.preprocessing.STOPWORDS`.
 
     Examples
     --------
-    >>> from samenvattr.parsing.preprocessing import remove_stopwords
+    >>> from hitexsumm.parsing.preprocessing import remove_stopwords
     >>> remove_stopwords("Better late than never, but better never late.")
     u'Better late never, better late.'
 
@@ -113,7 +113,7 @@ def remove_stopwords(s):
 
 
 def strip_punctuation(s):
-    """Replace punctuation characters with spaces in `s` using :const:`~samenvattr.parsing.preprocessing.RE_PUNCT`.
+    """Replace punctuation characters with spaces in `s` using :const:`~hitexsumm.parsing.preprocessing.RE_PUNCT`.
 
     Parameters
     ----------
@@ -126,7 +126,7 @@ def strip_punctuation(s):
 
     Examples
     --------
-    >>> from samenvattr.parsing.preprocessing import strip_punctuation
+    >>> from hitexsumm.parsing.preprocessing import strip_punctuation
     >>> strip_punctuation("A semicolon is a stronger break than a comma, but not as much as a full stop!")
     u'A semicolon is a stronger break than a comma  but not as much as a full stop '
 
@@ -139,7 +139,7 @@ strip_punctuation2 = strip_punctuation
 
 
 def strip_tags(s):
-    """Remove tags from `s` using :const:`~samenvattr.parsing.preprocessing.RE_TAGS`.
+    """Remove tags from `s` using :const:`~hitexsumm.parsing.preprocessing.RE_TAGS`.
 
     Parameters
     ----------
@@ -152,7 +152,7 @@ def strip_tags(s):
 
     Examples
     --------
-    >>> from samenvattr.parsing.preprocessing import strip_tags
+    >>> from hitexsumm.parsing.preprocessing import strip_tags
     >>> strip_tags("<i>Hello</i> <b>World</b>!")
     u'Hello World!'
 
@@ -176,7 +176,7 @@ def strip_short(s, minsize=3):
 
     Examples
     --------
-    >>> from samenvattr.parsing.preprocessing import strip_short
+    >>> from hitexsumm.parsing.preprocessing import strip_short
     >>> strip_short("salut les amis du 59")
     u'salut les amis'
     >>>
@@ -189,7 +189,7 @@ def strip_short(s, minsize=3):
 
 
 def strip_numeric(s):
-    """Remove digits from `s` using :const:`~samenvattr.parsing.preprocessing.RE_NUMERIC`.
+    """Remove digits from `s` using :const:`~hitexsumm.parsing.preprocessing.RE_NUMERIC`.
 
     Parameters
     ----------
@@ -202,9 +202,9 @@ def strip_numeric(s):
 
     Examples
     --------
-    >>> from samenvattr.parsing.preprocessing import strip_numeric
-    >>> strip_numeric("0text24samenvattr365test")
-    u'textsamenvattrtest'
+    >>> from hitexsumm.parsing.preprocessing import strip_numeric
+    >>> strip_numeric("0text24hitexsumm365test")
+    u'texthitexsummtest'
 
     """
     s = utils.to_unicode(s)
@@ -212,7 +212,7 @@ def strip_numeric(s):
 
 
 def strip_non_alphanum(s):
-    """Remove non-alphabetic characters from `s` using :const:`~samenvattr.parsing.preprocessing.RE_NONALPHA`.
+    """Remove non-alphabetic characters from `s` using :const:`~hitexsumm.parsing.preprocessing.RE_NONALPHA`.
 
     Parameters
     ----------
@@ -229,7 +229,7 @@ def strip_non_alphanum(s):
 
     Examples
     --------
-    >>> from samenvattr.parsing.preprocessing import strip_non_alphanum
+    >>> from hitexsumm.parsing.preprocessing import strip_non_alphanum
     >>> strip_non_alphanum("if-you#can%read$this&then@this#method^works")
     u'if you can read this then this method works'
 
@@ -240,7 +240,7 @@ def strip_non_alphanum(s):
 
 def strip_multiple_whitespaces(s):
     r"""Remove repeating whitespace characters (spaces, tabs, line breaks) from `s`
-    and turns tabs & line breaks into spaces using :const:`~samenvattr.parsing.preprocessing.RE_WHITESPACE`.
+    and turns tabs & line breaks into spaces using :const:`~hitexsumm.parsing.preprocessing.RE_WHITESPACE`.
 
     Parameters
     ----------
@@ -253,7 +253,7 @@ def strip_multiple_whitespaces(s):
 
     Examples
     --------
-    >>> from samenvattr.parsing.preprocessing import strip_multiple_whitespaces
+    >>> from hitexsumm.parsing.preprocessing import strip_multiple_whitespaces
     >>> strip_multiple_whitespaces("salut" + '\r' + " les" + '\n' + "         loulous!")
     u'salut les loulous!'
 
@@ -263,7 +263,7 @@ def strip_multiple_whitespaces(s):
 
 
 def split_alphanum(s):
-    """Add spaces between digits & letters in `s` using :const:`~samenvattr.parsing.preprocessing.RE_AL_NUM`.
+    """Add spaces between digits & letters in `s` using :const:`~hitexsumm.parsing.preprocessing.RE_AL_NUM`.
 
     Parameters
     ----------
@@ -276,7 +276,7 @@ def split_alphanum(s):
 
     Examples
     --------
-    >>> from samenvattr.parsing.preprocessing import split_alphanum
+    >>> from hitexsumm.parsing.preprocessing import split_alphanum
     >>> split_alphanum("24.0hours7 days365 a1b2c3")
     u'24.0 hours 7 days 365 a 1 b 2 c 3'
 
@@ -300,7 +300,7 @@ def stem_text(text):
 
     Examples
     --------
-    >>> from samenvattr.parsing.preprocessing import stem_text
+    >>> from hitexsumm.parsing.preprocessing import stem_text
     >>> stem_text("While it is quite useful to be able to search a large collection of documents almost instantly.")
     u'while it is quit us to be abl to search a larg collect of document almost instantly.'
 
@@ -325,13 +325,13 @@ def preprocess_string(s, filters=DEFAULT_FILTERS):
 
     Default list of filters:
 
-    * :func:`~samenvattr.parsing.preprocessing.strip_tags`,
-    * :func:`~samenvattr.parsing.preprocessing.strip_punctuation`,
-    * :func:`~samenvattr.parsing.preprocessing.strip_multiple_whitespaces`,
-    * :func:`~samenvattr.parsing.preprocessing.strip_numeric`,
-    * :func:`~samenvattr.parsing.preprocessing.remove_stopwords`,
-    * :func:`~samenvattr.parsing.preprocessing.strip_short`,
-    * :func:`~samenvattr.parsing.preprocessing.stem_text`.
+    * :func:`~hitexsumm.parsing.preprocessing.strip_tags`,
+    * :func:`~hitexsumm.parsing.preprocessing.strip_punctuation`,
+    * :func:`~hitexsumm.parsing.preprocessing.strip_multiple_whitespaces`,
+    * :func:`~hitexsumm.parsing.preprocessing.strip_numeric`,
+    * :func:`~hitexsumm.parsing.preprocessing.remove_stopwords`,
+    * :func:`~hitexsumm.parsing.preprocessing.strip_short`,
+    * :func:`~hitexsumm.parsing.preprocessing.stem_text`.
 
     Parameters
     ----------
@@ -345,7 +345,7 @@ def preprocess_string(s, filters=DEFAULT_FILTERS):
 
     Examples
     --------
-    >>> from samenvattr.parsing.preprocessing import preprocess_string
+    >>> from hitexsumm.parsing.preprocessing import preprocess_string
     >>> preprocess_string("<i>Hel 9lo</i> <b>Wo9 rld</b>! Th3     weather_is really g00d today, isn't it?")
     [u'hel', u'rld', u'weather', u'todai', u'isn']
     >>>
@@ -362,7 +362,7 @@ def preprocess_string(s, filters=DEFAULT_FILTERS):
 
 
 def preprocess_documents(docs):
-    """Apply :const:`~samenvattr.parsing.preprocessing.DEFAULT_FILTERS` to the documents strings.
+    """Apply :const:`~hitexsumm.parsing.preprocessing.DEFAULT_FILTERS` to the documents strings.
 
     Parameters
     ----------
@@ -375,7 +375,7 @@ def preprocess_documents(docs):
 
     Examples
     --------
-    >>> from samenvattr.parsing.preprocessing import preprocess_documents
+    >>> from hitexsumm.parsing.preprocessing import preprocess_documents
     >>> preprocess_documents(["<i>Hel 9lo</i> <b>Wo9 rld</b>!", "Th3     weather_is really g00d today, isn't it?"])
     [[u'hel', u'rld'], [u'weather', u'todai', u'isn']]
 
