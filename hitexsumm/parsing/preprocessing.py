@@ -41,42 +41,29 @@ from hitexsumm import utils
 from hitexsumm.parsing.porter import PorterStemmer
 
 
+# from https://github.com/stopwords-iso/stopwords-hi
+# Released under The MIT License (MIT)
+# https://github.com/stopwords-iso/stopwords-hi/blob/master/LICENSE
 STOPWORDS = frozenset([
-    'aan','aangaande', 'aangezien', 'achte', 'achter', 'achterna', 'af', 'afgelopen', 'al', 'aldaar', 'aldus',
-    'alhoewel', 'alias', 'alle', 'allebei', 'alleen', 'alles', 'als', 'alsnog', 'altijd', 'altoos', 'ander', 'andere',
-    'anders', 'anderszins', 'beetje', 'behalve', 'behoudens', 'beide', 'beiden', 'ben', 'beneden', 'bent', 'bepaald',
-    'betreffende', 'bij', 'bijna', 'bijv', 'binnen', 'binnenin', 'blijkbaar', 'blijken', 'boven', 'bovenal',
-    'bovendien', 'bovengenoemd', 'bovenstaand', 'bovenvermeld', 'buiten', 'bv', 'daar', 'daardoor', 'daarheen',
-    'daarin', 'daarna', 'daarnet', 'daarom', 'daarop', 'daaruit', 'daarvanlangs', 'dan', 'dat', 'de', 'deden', 'deed',
-    'der', 'derde', 'derhalve', 'dertig', 'deze', 'dhr', 'die', 'dikwijls', 'dit', 'doch', 'doe', 'doen', 'doet',
-    'door', 'doorgaand', 'drie', 'duizend', 'dus', 'echter', 'een', 'eens', 'eer', 'eerdat', 'eerder', 'eerlang',
-    'eerst', 'eerste', 'eigen', 'eigenlijk', 'elk', 'elke', 'en', 'enig', 'enige', 'enigszins', 'enkel', 'er', 'erdoor',
-    'erg', 'ergens', 'etc', 'etcetera', 'even', 'eveneens', 'evenwel', 'gauw', 'ge', 'gedurende', 'geen', 'gehad',
-    'gekund', 'geleden', 'gelijk', 'gemoeten', 'gemogen', 'genoeg', 'geweest', 'gewoon', 'gewoonweg', 'haar',
-    'haarzelf', 'had', 'hadden', 'hare', 'heb', 'hebben', 'hebt', 'hedden', 'heeft', 'heel', 'hem', 'hemzelf', 'hen',
-    'het', 'hetzelfde', 'hier', 'hierbeneden', 'hierboven', 'hierin', 'hierna', 'hierom', 'hij', 'hijzelf', 'hoe',
-    'hoewel', 'honderd', 'hun', 'hunne', 'ieder', 'iedere', 'iedereen', 'iemand', 'iets', 'ik', 'ikzelf', 'in',
-    'inderdaad', 'inmiddels', 'intussen', 'inzake', 'is', 'ja', 'je', 'jezelf', 'jij', 'jijzelf', 'jou', 'jouw',
-    'jouwe', 'juist', 'jullie', 'kan', 'klaar', 'kon', 'konden', 'krachtens', 'kun', 'kunnen', 'kunt', 'laatst',
-    'later', 'liever', 'lijken', 'lijkt', 'maak', 'maakt', 'maakte', 'maakten', 'maar', 'mag', 'maken', 'me', 'meer',
-    'meest', 'meestal', 'men', 'met', 'mevr', 'mezelf', 'mij', 'mijn', 'mijnent', 'mijner', 'mijzelf', 'minder', 'miss',
-    'misschien', 'missen', 'mits', 'mocht', 'mochten', 'moest', 'moesten', 'moet', 'moeten', 'mogen', 'mr', 'mrs', 'mw',
-    'na', 'naar', 'nadat', 'nam', 'namelijk', 'nee', 'neem', 'negen', 'nemen', 'nergens', 'net', 'niemand', 'niet',
-    'niets', 'niks', 'noch', 'nochtans', 'nog', 'nogal', 'nooit', 'nu', 'nv', 'of', 'ofschoon', 'om', 'omdat', 'omhoog',
-    'omlaag', 'omstreeks', 'omtrent', 'omver', 'ondanks', 'onder', 'ondertussen', 'ongeveer', 'ons', 'onszelf', 'onze',
-    'onzeker', 'ooit', 'ook', 'op', 'opnieuw', 'opzij', 'over', 'overal', 'overeind', 'overige', 'overigens', 'paar',
-    'pas', 'per', 'precies', 'recent', 'redelijk', 'reeds', 'rond', 'rondom', 'samen', 'sedert', 'sinds', 'sindsdien',
-    'slechts', 'sommige', 'spoedig', 'steeds', 'tamelijk', 'te', 'tegen', 'tegenover', 'tenzij', 'terwijl', 'thans',
-    'tien', 'tiende', 'tijdens', 'tja', 'toch', 'toe', 'toen', 'toenmaals', 'toenmalig', 'tot', 'totdat', 'tussen',
-    'twee', 'tweede', 'u', 'uit', 'uitgezonderd', 'uw', 'vaak', 'vaakwat', 'van', 'vanaf', 'vandaan', 'vanuit',
-    'vanwege', 'veel', 'veeleer', 'veertig', 'verder', 'verscheidene', 'verschillende', 'vervolgens', 'via', 'vier',
-    'vierde', 'vijf', 'vijfde', 'vijftig', 'vol', 'volgend', 'volgens', 'voor', 'vooraf', 'vooral', 'vooralsnog',
-    'voorbij', 'voordat', 'voordezen', 'voordien', 'voorheen', 'voorop', 'voorts', 'vooruit', 'vrij', 'vroeg', 'waar',
-    'waarom', 'waarschijnlijk', 'wanneer', 'want', 'waren', 'was', 'wat', 'we', 'wederom', 'weer', 'weg', 'wegens',
-    'weinig', 'wel', 'weldra', 'welk', 'welke', 'werd', 'werden', 'werder', 'wezen', 'whatever', 'wie', 'wiens', 'wier',
-    'wij', 'wijzelf', 'wil', 'wilden', 'willen', 'word', 'worden', 'wordt', 'zal', 'ze', 'zei', 'zeker', 'zelf',
-    'zelfde', 'zelfs', 'zes', 'zeven', 'zich', 'zichzelf', 'zij', 'zijn', 'zijne', 'zijzelf', 'zo', 'zoals', 'zodat',
-    'zodra', 'zonder', 'zou', 'zouden', 'zowat', 'zulk', 'zulke', 'zullen', 'zult'
+    "अंदर", "अत", "अदि", "अप", "अपना", "अपनि", "अपनी", "अपने", "अभि", "अभी", "आदि",
+    "आप", "इंहिं", "इंहें", "इंहों", "इतयादि", "इत्यादि", "इन", "इनका", "इन्हीं", "इन्हें", "इन्हों",
+    "इस", "इसका", "इसकि", "इसकी", "इसके", "इसमें", "इसि", "इसी", "इसे", "उंहिं", "उंहें",
+    "उंहों", "उन", "उनका", "उनकि", "उनकी", "उनके", "उनको", "उन्हीं", "उन्हें", "उन्हों", "उस",
+    "उसके", "उसि", "उसी", "उसे", "एक", "एवं", "एस", "एसे", "ऐसे", "ओर", "और", "कइ",
+    "कई", "कर", "करता", "करते", "करना", "करने", "करें", "कहते", "कहा", "का", "काफि",
+    "काफ़ी", "कि", "किंहें", "किंहों", "कितना", "किन्हें", "किन्हों", "किया", "किर", "किस", "किसि", "किसी",
+    "किसे", "की", "कुछ", "कुल", "के", "को", "कोइ", "कोई", "कोन", "कोनसा", "कौन", "कौनसा",
+    "गया", "घर", "जब", "जहाँ", "जहां", "जा", "जिंहें", "जिंहों", "जितना", "जिधर", "जिन", "जिन्हें",
+    "जिन्हों", "जिस", "जिसे", "जीधर", "जेसा", "जेसे", "जैसा", "जैसे", "जो", "तक", "तब", "तरह",
+    "तिंहें", "तिंहों", "तिन", "तिन्हें", "तिन्हों", "तिस", "तिसे", "तो", "था", "थि", "थी", "थे", "दबारा",
+    "दवारा", "दिया", "दुसरा", "दुसरे", "दूसरे", "दो", "द्वारा", "न", "नहिं", "नहीं", "ना", "निचे",
+    "निहायत", "नीचे", "ने", "पर", "पहले", "पुरा", "पूरा", "पे", "फिर", "बनि", "बनी", "बहि",
+    "बही", "बहुत", "बाद", "बाला", "बिलकुल", "भि", "भितर", "भी", "भीतर", "मगर", "मानो", "मे",
+    "में", "यदि", "यह", "यहाँ", "यहां", "यहि", "यही", "या", "यिह", "ये", "रखें", "रवासा", "रहा",
+    "रहे", "ऱ्वासा", "लिए", "लिये", "लेकिन", "व", "वगेरह", "वरग", "वर्ग", "वह", "वहाँ", "वहां",
+    "वहिं", "वहीं", "वाले", "वुह", "वे", "वग़ैरह", "संग", "सकता", "सकते", "सबसे", "सभि", "सभी",
+    "साथ", "साबुत", "साभ", "सारा", "से", "सो", "हि", "ही", "हुअ", "हुआ", "हुइ", "हुई", "हुए",
+    "हे", "हें", "है", "हैं", "हो", "होता", "होति", "होती", "होते", "होना", "होने"
 ])
 
 
